@@ -18,9 +18,9 @@ let history = [];
 
 playButton.addEventListener("click", play);
 resetButton.addEventListener("click", reset);
-userInput.addEventListener("focus",function(){
-  userInput.value = ''
-})
+userInput.addEventListener("focus", function () {
+  userInput.value = "";
+});
 
 function RandomPick() {
   computerNumber = Math.floor(Math.random() * 100 + 1);
@@ -28,36 +28,39 @@ function RandomPick() {
 }
 function play() {
   let userValue = userInput.value;
-  if (history.includes((userValue))) {
+  if (userValue == "") {
+    resultArea.textContent = "수를 입력하세요!";
+  } else{
+  if (history.includes(userValue)) {
     resultArea.textContent = "같은 수를 입력해서 좀비가 경고합니다!";
-    
-  }else{
-  chances--;
-  chanceArea.textContent = `남은 기회 : ${chances}`;
-  if (userValue == computerNumber) {
-    resultArea.textContent = `맞췄습니다!`;
-    playButton.disabled = true;
-    return;
-  }
-  if (chances == 0) {
-    playButton.disabled = true;
-    return;
-  }
-  if (userValue > computerNumber) {
-    resultArea.textContent = "DOWN!"
-    history.push(userValue)
-    console.log(history)
-  } else if (userValue < computerNumber) {
-    resultArea.textContent = "DOWN!"
-    history.push(userValue)
-    console.log(history)
-  }
-}
-}
-function reset(){
-    chances = 5;
-    resultArea.textContent = '결과가 나온다'
+  } else {
+    chances--;
     chanceArea.textContent = `남은 기회 : ${chances}`;
-    playButton.disabled = false;
+    if (userValue == computerNumber) {
+      resultArea.textContent = `맞췄습니다!`;
+      playButton.disabled = true;
+      return;
+    }
+    if (chances == 0) {
+      playButton.disabled = true;
+      return;
+    }
+    if (userValue > computerNumber) {
+      resultArea.textContent = "DOWN!";
+      history.push(userValue);
+      console.log(history);
+    } else if (userValue < computerNumber) {
+      resultArea.textContent = "UP!";
+      history.push(userValue);
+      console.log(history);
+    }
+  }
+  }
+}
+function reset() {
+  chances = 5;
+  resultArea.textContent = "결과가 나온다";
+  chanceArea.textContent = `남은 기회 : ${chances}`;
+  playButton.disabled = false;
 }
 RandomPick();

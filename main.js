@@ -15,12 +15,15 @@ let playButton = document.getElementById("play-Button");
 let resetButton = document.getElementById("reset-Button");
 let chances = 5;
 let history = [];
+chanceArea.textContent = `남은 기회 : ${chances}`;
 
 playButton.addEventListener("click", play);
 resetButton.addEventListener("click", reset);
 userInput.addEventListener("focus", function () {
   userInput.value = "";
 });
+
+
 
 function RandomPick() {
   computerNumber = Math.floor(Math.random() * 100 + 1);
